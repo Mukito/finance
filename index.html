@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dev.finance$</title>
+
+    <link rel="shortcut icon" href="./assets/favicon.svg" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,400;0,700;1,100;1,400;1,700&display=swap">
+</head>
+<body>
+
+    <header>
+        <img src="assets/logo.svg" alt="Dev Finance">
+    </header>
+    
+    <main class="container">
+        <!-- Menu Hamburguer -->
+         <input onclick="ModalMenu.open()" id="menu-hamburguer" type="checkbox">
+
+         <label for="menu-hamburguer">
+            <nav class="menu">
+                <span class="hamburguer"></span>
+            </nav>
+         </label>
+
+         <div class="modal-overlay2 modalmenu">
+            <div class="modalmenuopen">
+                <img onclick="ModalMenu.close()" src="assets/logo.svg" alt="">
+                <ul>
+                    <li><a onclick="ModalMenu.close()" href="#">Inicio</a></li>
+                    <li><a href="#"><s>Carteiras</s></a></li>
+                    <li><a href="#"><s>Extrato</s></a></li>
+                    <li><a href="#"><s>Carteiras</s></a></li>
+                    <li><a onclick="DOM.switchTheme()" href="#">Alterar Tema</a></li>
+                </ul>
+            </div>
+         </div>
+
+
+         <section id="balance">
+            <h2 class="sr-only">Balanço</h2>
+
+            <div class="card">
+                <h3>
+                    <span>Entradas</span>
+                    <img src="assets/income.svg" alt="Image de Entradas">
+                </h3>
+                <p id="incomeDisplay">R$ 0,00</p>
+            </div>
+
+            <div class="card">
+                <h3>
+                    <span>Saídas</span>
+                    <img src="assets/expense.svg" alt="Imagem de Saída">
+                </h3>
+                <p id="expenseDisplay">R$ 0,00</p>
+            </div>
+            <div class="card total">
+                <h3>
+                    <span>Total</span>
+                    <svg width="32" height="32" viewBow="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path class="svg total" d="M16 1.33333v30.6667" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path class="svg total" 
+                        d="M22.6667 6.66667H12.6667C11.429 6.66667 10.242 7.15834 9.36684 8.03351C8.49167 8.90868 8 10.0957 8 11.3333C8 12.571 8.49167 13.758 9.36684 14.6332C10.242 15.5083 11.429 16 12.6667 16H19.3333C20.571 16 21.758 16.4917 22.6332 17.3668C23.5083 18.242 24 19.429 24 20.6667C24 21.9043 23.5083 23.0913 22.6332 23.9665C21.758 24.8417 20.571 25.3333 19.3333 25.3333H8" 
+                        stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </h3>
+                <p id="totalDisplay">R$ 0,00</p>
+            </div>
+         </section>
+
+         <section id="transaction">
+            <h2 class="sr-only">Transações</h2>
+
+            <a href="#" onclick="Modal.open()" class="button new ">+ Nova Transação</a>
+
+            <table id="data-table">
+                <thead>
+                    <tr>
+                        <th class="description">Descrição</th>
+                        <th>Valor</th>
+                        <th>Data</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+         </section>
+    </main>
+
+    <div class="modal-overlay">
+        <div class="modal">
+            <div id="form">
+                <h2>Nova Transação</h2>
+                <form action="" onsubmit="Form.submit(event)">
+                    <div class="input-group">
+                        <label class="sr-only" for="description">Descrição</label>
+                        <input type="text" id="description" name="description" placeholder="Descrição" />
+                    </div>
+                    <div class="input-group">
+                        <label class="sr-only" for="amount">Valor</label>
+                        <input type="number" step="0.01" id="amount" name="amount" placeholder="0,00" />
+                        <small class="help">Use o sinal - (negativo) para despesas e , (vírgula) para casas decímais.</small>
+                    </div>
+                    <div class="input-group">
+                        <label class="sr-only" for="date">Data</label>
+                        <input type="date" id="date" name="date" />
+                    </div>
+                    <div class="input-group actions">
+                        <a href="#" onclick="Modal.close()" class="button cancel">Cancelar</a>
+                        <button>Salvar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal-overlay confirm">
+        <div class="modal">
+            <div class="input-group action exclude">
+                <p>Deseja mesmo apagar essa transação?</p>
+                <a href="#" onclick="ModalConfirm.close()" class="button confirm">Cancelar</a>
+                <button onclick="Transaction.remove()">CONFIRMAR</button>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <a href="https://github.com/Mukito">
+            <img id="githubIcon" src="./assets/github-icon.svg" alt="">
+        </a>
+        <p>Maratona Discover - RocketSeat</p>
+    </footer>
+
+    <script src="./script.js"></script>
+</body>
+</html>

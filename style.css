@@ -1,0 +1,518 @@
+/*------------ RESETTING ------------*/
+:root {
+    --font-color-base: #363f5f;
+    --input-disabled: rgb(209, 209, 209);
+    --green: #49aa26;
+    --light-green: #3dd705;
+    --expense-color: #e92929;
+    --light-color-base: #fff;
+    --table-color-base: #fff;
+    --background-color-header: #2d4a22;
+    --background-color: #f0f2f5;
+    --background-color-input: #fff
+}
+
+/* Media Dark Mode */
+@media (prefers-color-scheme: dark) {
+    :root {
+      --font-color-base: #f0f2f5;
+      --input-disabled: #292430;
+      --green: #49aa26;
+      --light-green: #555;
+      --expense-color: #e92929;
+      --light-color-base: #1f1b24;
+      --table-color-base: #121212;
+      --background-color-header: #121212;
+      --background-color: #1f1b24;
+      --background-color-input: #3a3342;
+  
+      --calendar-picker-mode: 1;
+  
+      --image-github: url(./assets/GitHub-Mark-Light-64px.svg);
+    }
+  }
+
+*,
+*:before,
+*:after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 93.75%; /* 15px */
+}
+
+body {
+    background: var(--background-color);
+    font-family: "Poppins", sans-serif;
+    transition: 1s;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+.container {
+    width: min(90vw, 800px);  /* Função que mantem a menor proporção (Responsividade)*/
+
+    position: relative;
+
+    margin: auto;
+}
+
+.svg {
+    stroke: var(--light-color-base)
+}
+
+/*------------ MENU HAMBURGUER ------------*/
+
+.menu {
+    background: white;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    top: -8.9rem;
+    cursor: pointer;
+    box-shadow: 0 0 0 0  #fff, 0 0 0 0  #fff;
+}
+
+.menu:hover {
+    box-shadow: 0 0 0 8px  #fff, 0 0 0 8px  #fff;
+    transition: box-shadow 0.5s ease-in-out;
+}
+
+.hamburguer {
+    position: relative;
+    display: block;
+    background: #000;
+    width: 30px;
+    height: 2px;
+    top: 30px;
+    left: 15px;
+    transition: .5s ease-in-out;
+}
+
+.hamburguer:before,
+.hamburguer:after {
+    background: #000;
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transition: .5s ease-in-out;
+}
+
+.hamburguer:before {
+    top: -10px;
+}
+
+.hamburguer::after {
+    bottom: -10px;
+}
+
+#menu-hamburguer {
+    display: none;
+}
+
+
+/*  MODAL  */
+
+
+
+.modal-overlay2 {
+    width: 100%;
+    height: 100%;
+
+    background-color: rgba(0, 0, 0, 0.7);  /* Transparencia */
+
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    display: flex;
+
+    opacity: 0;            /* Retirando o Modal da tela */
+    visibility: hidden;
+
+    z-index: 999;
+}
+
+.modal-overlay2.active2 {
+    opacity: 1;
+    visibility: visible; /* Voltando a aparecer na tela */
+    
+}
+
+.modalmenuopen {
+    background: var(--light-color-base);
+    padding: 1.5rem;
+    position: relative;
+    width: 90%;
+    max-width: 300px;
+
+    font-size: 2rem;
+}
+
+.modalmenuopen > ul > li {
+    padding-top: 2rem;   
+    list-style: none;
+    
+}
+
+.modalmenuopen img {
+    background-color: darkgreen;
+    width: 100%;
+    cursor: pointer;
+
+    padding: 2rem;
+}
+
+/*------------ TITLES ------------*/
+h2 {
+    margin-top: 3.2rem;
+    margin-bottom: 0.8rem;
+    color: var(--font-color-base);
+    font-weight: normal;
+}
+
+/*------------ LINKS AND BUTTONS ------------*/
+a {
+    color: var(--green);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+a:hover {
+    color: var(--light-green);
+}
+
+
+button {
+    width: 100%;
+    height: 50px;
+
+    border: none;
+
+    color: var(--light-color-base);
+    background: var(--green);
+
+    padding: 0;
+    border-radius: 0.25rem;
+
+    cursor: pointer;
+}
+
+button:hover { 
+    background: var(--light-green);
+}
+
+
+
+.button.new {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: .8rem;
+
+    height: 40px;
+    width: 160px;
+
+    border: 2px var(--green) solid;
+    border-radius: 0.25;
+
+    opacity: 0.7;
+}
+
+.button.new:hover {
+    opacity: 1;
+}
+
+.button.cancel {
+    color: var(--expense-color);
+    border: 2px var(--expense-color) solid;
+    border-radius: 0.25rem;
+
+    height: 50px;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    opacity: 0.6;
+}
+
+.button.cancel:hover {
+    opacity: 1;
+}
+
+/*------------ HEADER ------------*/
+header {
+    background: var(--background-color-header);
+    padding: 2rem 0rem 12rem;
+    text-align: center;
+}
+
+#logo {
+    color:#FFF;
+    font-weight: 100;
+}
+
+/*------------ BALANCE ------------*/
+#balance {
+    margin-top: -6rem;
+}
+
+#balance h2 {
+    color: var(--light-color-base);
+    margin-top: 0;
+}
+
+/*------------ CARDS ------------*/
+.card {
+    background: var(--light-color-base);
+    padding: 1.5rem 2rem;
+    border-radius: 0.25rem;
+
+    margin-bottom: 2rem;
+
+    color:  var(--font-color-base);
+}
+
+.card h3 {
+    font-weight: normal;
+    font-size: 1rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.card p {
+    font-size: 2rem;
+    line-height: 3rem;
+
+    margin-top: 1rem;
+}
+
+.card.total {
+    background: var(--green);
+    color: var(--light-color-base);
+}
+
+/*------------ TABLE ------------*/
+#data-table {
+    width: 100%;
+    border-spacing: 0 0.5rem;
+    color: #969cb3;
+}
+
+#transaction {
+    display: block;
+    width: 100%;
+    overflow-x: auto; /* Rolagem da esquerda pra direita, sem mexer na pagina!! */
+}
+
+table thead tr th:first-child,
+table tbody tr td:first-child {
+    border-radius: 0.25rem 0 0 0.25rem;
+}
+
+table thead tr th:last-child,
+table tbody tr td:last-child {
+    border-radius: 0 0.25rem 0.25rem 0;
+}
+
+table th {
+    background: var(--table-color-base);
+
+    font-weight: normal;
+    padding: 1rem 2rem;
+
+    text-align: left;
+    color: #969cb3;
+
+}
+
+table tbody tr {
+    opacity: 0.7;
+}
+
+table tbody tr:hover {
+    opacity: 1;
+}
+
+table tbody td {
+    background: var(--table-color-base);
+    padding: 1rem 2rem;
+}
+
+td.description {
+    color: var(--font-color-base)
+}
+
+td.income {
+    color: #12a454;
+}
+
+td.expense {
+    color: var(--expense-color);
+}
+
+/*------------ MODAL ------------*/
+
+.modal-overlay {
+    width: 100%;
+    height: 100%;
+
+    background-color: rgba(0, 0, 0, 0.7);  /* Transparencia */
+
+    position: fixed;
+    top: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    opacity: 0;            /* Retirando o Modal da tela */
+    visibility: hidden;
+
+    z-index: 999;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible; /* Voltando a aparecer na tela */
+}
+
+
+.modal {
+    background:  var(--background-color);
+    padding: 2.4rem;
+    position: relative;
+    width: 90%;
+    max-width: 500px;
+
+    position: relative;
+    z-index: 1;
+}
+
+.help {
+    color: var(--font-color-base);
+}
+
+/*------------ MODAL DELETE CONFIRM ------------*/
+
+.button.confirm {
+    color: red;
+    border: 2px red solid;
+    border-radius: 00.25rem;
+
+    height: 50px;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    opacity: 0.6;
+}
+
+.button.confirm:hover {
+    opacity: 1;
+}
+
+.exclude {
+    color:  var(--font-color-base);
+    flex-wrap: wrap;
+}
+
+.exclude > p {
+    margin-bottom: 2rem;
+}
+
+
+/*------------ FORM ------------*/
+
+#form {
+    max-width: 500px;
+}
+
+#form h2 {
+    margin-top: 0;
+}
+input {
+    border: none;
+    border-radius: 0.2rem;
+
+    padding: 0.8rem;
+
+    width: 100%;
+}
+
+.input-group {
+    margin-top: 0.8rem;
+}
+
+.input-group small {
+    opacity: 0.5;
+}
+
+.input-group.actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.input-group.actions .button, 
+.input-group.actions button {
+    width: 48%;
+
+}
+
+
+/*------------ FOOTER ------------*/
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: min(90vw, 800px);
+    margin: auto;
+
+    text-align: center;
+    padding: 4rem 0 2rem;
+    color: var(--font-color-base);
+}
+
+#githubIcon {
+    width: 2rem;
+    margin-right: 10px;
+}
+
+#githubIcon:hover {
+    transition: 0.2s;
+   opacity: 0.7;
+}
+
+/*------------ RESPONSIVE ------------*/@media (min-width: 800px) {
+    html {
+        font-size: 87.5%;
+    }
+
+    #balance {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 2rem;
+    }
+}
